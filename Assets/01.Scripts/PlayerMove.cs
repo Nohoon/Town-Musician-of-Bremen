@@ -5,26 +5,24 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public Transform[] WayPoint;
-    Vector3 WayPointPosition;
+    Vector3 dir;
 
     int count;
     bool isTrriger;
     // Start is called before the first frame update
     void Start()
     {
-        count = 1;
+        count = 0;
         isTrriger=false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
-            ++count;
+        transform.LookAt(WayPoint[count]);
             
-        WayPointPosition=WayPoint[count].position -transform.position;
-
-        transform.position += WayPointPosition.normalized * 3.25f * Time.deltaTime;
+        dir=WayPoint[count].position -transform.position;
+        transform.position += dir.normalized * 1.25f * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
